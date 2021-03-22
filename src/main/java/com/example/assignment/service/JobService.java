@@ -4,11 +4,11 @@ import com.example.assignment.dto.ExecuteJobDto;
 import com.example.assignment.dto.JobDto;
 import com.example.assignment.model.Job;
 import com.example.assignment.repository.JobRepository;
-import com.sun.istack.internal.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;

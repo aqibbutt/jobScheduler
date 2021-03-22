@@ -15,14 +15,13 @@ public class JobDto {
     private Long id;
 
     @NotNull
-    private Job.JobStatus status;
+    private Job.Status status;
 
     @NotNull
-    private String jobTaskName;
+    private String title;
 
     @NotNull
-    private Integer jobPriority;
-
+    private Integer priority;
 
     @DateTimeFormat
     private LocalDateTime creationTime;
@@ -34,8 +33,8 @@ public class JobDto {
         this.setExecutionTime(job.getLastModified());
         this.setCreationTime(job.getCreated());
         this.setId(job.getId());
-        this.setJobPriority(job.getJobPriority());
-        this.setJobTaskName(job.getJobTaskName());
+        this.setPriority(job.getJobPriority());
+        this.setTitle(job.getJobTaskName());
         this.setStatus(job.getStatus());
     }
 }

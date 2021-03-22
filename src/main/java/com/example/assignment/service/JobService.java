@@ -34,7 +34,6 @@ public class JobService {
         Job job = new Job();
         job.mapDTO(dto);
         jobRepository.save(job);
-        System.out.println("Testing completed");
     }
 
     public List<JobDto> getJobs() {
@@ -51,14 +50,16 @@ public class JobService {
 
         // thread to send email
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.schedule(() -> updateJobStatusByPriority(executeJobDto.getStatus(), executeJobDto.getJobPriority()), executeJobDto.getTimeToExecuteJobInSecond(), TimeUnit.SECONDS);
+        scheduler.schedule(() -> updateJobStatusByPriority(executeJobDto.getStatus(), executeJobDto.getPriority()),
+                executeJobDto.getTimeToExecuteJobInSecond(),
+                TimeUnit.SECONDS);
 
         jobs.forEach(e -> dtoList.add(new JobDto(e))
         );
         return dtoList;
     }
 
-    private void updateJobStatusByPriority(@NotNull Job.JobStatus status, @NotNull Integer jobPriority) {
+    private void updateJobStatusByPriority(@NotNull Job.Status status, @NotNull Integer jobPriority) {
         List<Job> jobs = jobRepository.findByJobPriority(jobPriority);
         jobs.forEach(e -> e.setStatus(status));
         jobRepository.saveAll(jobs);
